@@ -17,26 +17,14 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
-    protected $fillable = [
-        'name',
-        'email',
-        'password',
-        'country_id',
-        'city_id',
-        'state_id',
-        'address',
-        'postal_code'
-    ];
+    protected $fillable = ['name', 'email', 'password', 'country_id', 'city_id', 'state_id', 'address', 'postal_code'];
 
     /**
      * The attributes that should be hidden for serialization.
      *
      * @var array<int, string>
      */
-    protected $hidden = [
-        'password',
-        'remember_token',
-    ];
+    protected $hidden = ['password', 'remember_token'];
 
     /**
      * The attributes that should be cast.
@@ -53,4 +41,23 @@ class User extends Authenticatable
         return $this->belongsTo(Country::class);
     }
 
+    public function calendars()
+    {
+        return $this->belongsToMany(Calendar::class);
+    }
+
+    public function departaments()
+    {
+        return $this->belongsToMany(Departament::class);
+    }
+
+    public function holidays()
+    {
+        return $this->hasMany(Holiday::class);
+    }
+
+    public function timesheets()
+    {
+        return $this->hasMany(Timesheet::class);
+    }
 }
